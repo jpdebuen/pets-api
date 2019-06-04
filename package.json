@@ -1,0 +1,35 @@
+{
+  "name": "pets-api",
+  "version": "1.0.0",
+  "description": "pets api 3ra generación kodemia",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpdebuen/pets-api.git"
+  },
+  "keywords": [
+    "api",
+    "pets",
+    "express",
+    "kodemia",
+    "tercera",
+    "generación"
+  ],
+  "author": "@jpdebuen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jpdebuen/pets-api/issues"
+  },
+  "homepage": "https://github.com/jpdebuen/pets-api#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "nodemon": "^1.19.1"
+  },
+  "devDependencies": {
+    "standard": "^12.0.1"
+  }
+}
