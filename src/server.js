@@ -1,4 +1,5 @@
 const express = require('express')
+
 const app = express()
 const port = 8585
 let exampleJSON = {
@@ -7,4 +8,7 @@ let exampleJSON = {
 
 app.get('/hola', (request, response) => response.json(exampleJSON))
 
-app.listen(port, () => console.log(`Example app listening to port ${port}!`))
+module.exports = {
+  server: app,
+  port
+}
