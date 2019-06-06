@@ -3,7 +3,7 @@ const db = require('./src/lib/db')
 
 db.connect()
   .then(() => {
-    console.log('db connected')
+    console.log('Database connected')
     server.listen(port, () => console.log(`Example app listening to port ${port}!`))
   })
   .catch(error => {
