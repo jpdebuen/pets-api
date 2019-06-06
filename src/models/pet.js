@@ -1,43 +1,59 @@
 const { Schema, model } = require('mongoose')
 
+// let ObjectId = model.Schema.Types.ObjectId
+
 const petSchema = new Schema({
   name: {
     type: String,
+    required: true,
     minlength: 2,
     maxlength: 50
   },
   species: {
-    type: String
+    type: String,
+    required: true
   },
   breed: {
-    type: String
+    type: String,
+    pattern: /^[a-zA-Z]{2,50}$/
   },
-  age: {
+  ageInYears: {
     type: Number,
-    minlength: 1
+    required: true,
+    minlength: 1,
+    maxlength: 1000
   },
   size: {
-    type: Number
+    type: Number,
+    enum: [
+      'small',
+      'medium',
+      'large'
+    ],
+    required: true
   },
   description: {
     type: String,
-    minlength: 20,
-    maxlength: 200
-  },
-  _id: {
-    type: Object
+    required: false,
+    maxlength: 300
   },
   photo: {
-    type: String
+    type: String,
+    required: true,
+    minlength: 2,
+    maxlength: 300
   },
-  status: {
-    type: Boolean
+  isAdopted: {
+    type: Boolean,
+    default: false
   },
   userId: {
-    type: String
+    type: String,
+    required: true
   },
   adopterUserId: {
-    type: String
+    type: String,
+    required: false
   }
 })
 

@@ -1,42 +1,55 @@
 const { Schema, model } = require('mongoose')
 
+// let ObjectId = model.Schema.Types.ObjectId
+
 const userSchema = new Schema({
-  _id: {
-    type: Object
+
+  email: {
+    type: String,
+    required: true,
+    minlength: 5,
+    maxlength: 250,
+    unique: true
   },
   name: {
-    type: String
+    type: String,
+    required: true,
+    minlength: 2,
+    maxlength: 50
   },
+
   lastName: {
-    type: String
-  },
-  type: {
-    type: String
-  },
-  adress: {
-    type: String
-  },
-  phone: {
-    type: String
-  },
-  email: {
-    type: String
+    type: String,
+    required: true,
+    minlength: 2,
+    maxlength: 50
   },
   age: {
     type: Number,
-    minlength: 2,
-    maxlength: 2
-  },
-  userName: {
-    type: String
-  },
-  description: {
-    type: String,
-    minlength: 20,
-    maxlength: 200
+    minlength: 18
   },
   password: {
-    type: String
+    type: String,
+    required: true
+  },
+  type: {
+    type: String,
+    enum: [
+      'admin',
+      'adopter'
+    ]
+  },
+  adress: {
+    type: String,
+    required: true,
+    maxlength: 200
+  },
+  phone: {
+    type: String,
+    required: true,
+    pattern: /^[a-zA-z]{8,15}$/,
+    minlength: 8,
+    maxlength: 15
   }
 })
 
