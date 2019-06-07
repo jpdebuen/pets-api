@@ -29,6 +29,30 @@ const signUp = (userData = {}) => {
   return user.save()
 }
 
+const getAll = async () => {
+  const allUsers = await User.find().lean()
+  const cleanUsers = allUsers.map((user) => {
+    const { password, ...cleanUser } = user
+    return cleanUser
+  })
+  return cleanUsers
+}
+
+const getById = async (userId) => {
+  const user = await User.findById(userId).lean()
+  if (!user) throw new Error('There are no users with the given Id')
+  const { password, ...cleanUser } = user
+  return cleanUser
+}
+
+const deleteById = (userId) => User.findByIdAndDelete(userId)
+
+const updateById = (userId, userData) => User.findByIdAndUpdate(userId, userData)
+
 module.exports = {
-  signUp
+  signUp,
+  getAll,
+  getById,
+  deleteById,
+  updateById
 }
