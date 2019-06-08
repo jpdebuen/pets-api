@@ -24,7 +24,7 @@ const petSchema = new Schema({
     maxlength: 1000
   },
   size: {
-    type: Number,
+    type: String,
     enum: [
       'small',
       'medium',
@@ -47,10 +47,6 @@ const petSchema = new Schema({
     type: Boolean,
     default: false
   },
-  userId: {
-    type: String,
-    required: true
-  },
   adopterUserId: {
     type: String,
     required: false
@@ -59,5 +55,5 @@ const petSchema = new Schema({
 
 module.exports = {
   schema: petSchema,
-  model: model('Pets', petSchema)
+  model: model('Pet', petSchema)
 }
