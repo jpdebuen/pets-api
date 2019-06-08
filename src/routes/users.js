@@ -1,10 +1,11 @@
 const express = require('express')
 
 const user = require('../usecases/user')
+const auth = require('../middlewares/auth')
 
 const router = express.Router()
 
-router.post('/', (request, response) => {
+router.post('/', auth, (request, response) => {
   try {
     const newUserData = request.body
 
@@ -28,7 +29,7 @@ router.post('/', (request, response) => {
   }
 })
 
-router.get('/', async (request, response) => {
+router.get('/', auth, async (request, response) => {
   try {
     const allUsers = await user.getAll()
     response.json({
@@ -49,7 +50,7 @@ router.get('/', async (request, response) => {
   }
 })
 
-router.get('/:id', async (request, response) => {
+router.get('/:id', auth, async (request, response) => {
   try {
     const { id } = request.params
     const foundUser = await user.getById(id)
@@ -71,7 +72,7 @@ router.get('/:id', async (request, response) => {
   }
 })
 
-router.delete('/:id', async (request, response) => {
+router.delete('/:id', auth, async (request, response) => {
   try {
     const { id } = request.params
     const deletedUser = await user.deleteById(id)
@@ -93,7 +94,7 @@ router.delete('/:id', async (request, response) => {
   }
 })
 
-router.put('/:id', async (request, response) => {
+router.put('/:id', auth, async (request, response) => {
   try {
     const { id } = request.params
     const newUserData = request.body
@@ -111,6 +112,32 @@ router.put('/:id', async (request, response) => {
     response.json({
       success: false,
       message: 'Unable to update user.',
+      error: error.message
+    })
+  }
+})
+
+router.post('/auth', async (request, response) => {
+  try {
+    const {
+      password,
+      email
+    } = request.body
+
+    const token = await user.login(email, password)
+    response.json({
+      success: true,
+      message: 'Login successful',
+      payload: {
+        token
+      }
+    })
+  } catch (error) {
+    console.error('Error: ', error)
+    response.status(401)
+    response.json({
+      success: false,
+      message: 'Login failed.',
       error: error.message
     })
   }

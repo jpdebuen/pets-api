@@ -13,6 +13,7 @@ const registerPet = (petData = {}) => {
     petId,
     adopterUserId
   } = petData
+
   const pet = new Pet({
     name,
     species,
